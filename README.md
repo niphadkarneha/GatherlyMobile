@@ -22,6 +22,9 @@ Application was built on Android Studio 3.2.
 In order to install GatherlyMobile application on the android phone follow the steps mentioned below
 
 1. Download the app-debug.apk on your local computer.
-2. Open Android Studio and run the apk.
+2. Open Android Studio
+  a. Click on profile or debug apk.
+  b. Select the app-debug.apk from your local computer.
+  c. If prompted, create a new folder and press run.
 3. You can use an emulator to test the application but to explore all of the features available on the application connect your      phone to the Android SDK and press, "Run".
 4. The application will now be launched on your phone, go ahead and explore.
