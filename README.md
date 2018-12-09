@@ -18,7 +18,7 @@ Application was built on Android Studio 3.2.
 2. Firebase client.
 3. Firebase messaging.
 
-**Installation:**
+**Installation:**<br/>
 In order to install GatherlyMobile application on the android phone follow the steps mentioned below
 
 1. Download the app-debug.apk on your local computer.
