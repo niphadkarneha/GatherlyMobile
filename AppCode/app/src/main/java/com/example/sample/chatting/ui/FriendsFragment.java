@@ -13,7 +13,6 @@ import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,8 +29,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.sample.chatting.MainActivity;
 import com.example.sample.chatting.R;
 import com.example.sample.chatting.data.FriendDB;
 import com.example.sample.chatting.data.StaticConfig;
@@ -52,8 +51,6 @@ import com.yarolegovich.lovelydialog.LovelyInfoDialog;
 import com.yarolegovich.lovelydialog.LovelyProgressDialog;
 import com.yarolegovich.lovelydialog.LovelyTextInputDialog;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,7 +63,7 @@ import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,SearchView.OnQueryTextListener {
 
     private RecyclerView recyclerListFrends;
     private ListFriendsAdapter adapter;
@@ -80,6 +77,7 @@ public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRe
     Snackbar snackbar;
     RelativeLayout relativeLayout;
     List<ListFriend> friendList;
+    Context context = getActivity();
 
     public static final String ACTION_DELETE_FRIEND = "com.example.sample.DELETE_FRIEND";
 
@@ -128,6 +126,7 @@ public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         mSwipeRefreshLayout.setOnRefreshListener(this);
         adapter = new ListFriendsAdapter(getContext(), dataListFriend, this);
         recyclerListFrends.setAdapter(adapter);
+        setHasOptionsMenu(true);
         dialogFindAllFriend = new LovelyProgressDialog(getContext());
         friendList = new ArrayList<>();
         if (listFriendID == null) {
@@ -176,48 +175,7 @@ public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         }
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.clear();
-        inflater.inflate(R.menu.menu_main,menu);
-        MenuItem item = menu.findItem(R.id.action_search);
-        SearchView searchView = new SearchView(((MainActivity)getActivity()).getSupportActionBar().getThemedContext());
-        MenuItemCompat.setActionView(item, searchView);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                filterData(newText);
-                return true ;
-            }
-        });
-    }
-
-    private void filterData(String newText) {
-
-        //new array list that will hold the filtered data
-        List<ListFriend> filterdNames = new ArrayList<>();
-
-        //looping through existing elements
-        for (ListFriend listFriend : friendList) {
-            //if the existing elements contains the search input
-            String friendnames = listFriend.getListFriend().toString();
-
-            if (friendnames.contains(newText)) {
-                //adding the element to filtered list
-                filterdNames.add(listFriend);
-            }
-        }
-
-        //calling a method of the adapter class and passing the filtered list
-        adapter.filterList(filterdNames);
-
-    }
 
 
     @Override
@@ -229,6 +187,71 @@ public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         detectFriendOnline.cancel();
         getListFriendUId();
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_main, menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView)item.getActionView();
+        searchView.setOnQueryTextListener(this);
+    }
+
+
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        String names = newText.toLowerCase();
+
+        ArrayList<Friend> nameList = new ArrayList<Friend>();
+
+        for(Friend f_name : dataListFriend.getListFriend())
+        {
+            String name = f_name.name.toLowerCase();
+
+            if (name.contains(names))
+            {
+                nameList.add(f_name);
+            }
+        }
+         adapter.updatelist(nameList);
+        return true;
+    }
+
+
+//    @Override
+//    public boolean onPrepareOptionsMenu(Menu menu) {
+//        if(viewPager.getCurrentItem() == 0)
+//        {
+//            menu.findItem(R.id.action_search).setVisible(true);
+//        }
+//        else
+//        {
+//            menu.findItem(R.id.action_search).setVisible(false);
+//        }
+//        return super.onPrepareOptionsMenu(menu);
+//    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.about) {
+            Toast.makeText(getActivity(), "Gatherly version 1.0", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     public class FragFriendClickFloatButton implements View.OnClickListener {
         Context context;
@@ -766,13 +789,13 @@ class ListFriendsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .show();
         }
     }
+    public void updatelist(ArrayList<Friend> nameList) {
 
-
-    public void filterList(List<ListFriend> filterdNames) {
-
-        this.listFriend = (ListFriend) filterdNames;
-        notifyDataSetChanged();
+        listFriend = new ListFriend();
+        listFriend.getListFriend().addAll(nameList);
+                notifyDataSetChanged();
     }
+
 }
 
 class ItemFriendViewHolder extends RecyclerView.ViewHolder{
@@ -789,8 +812,6 @@ class ItemFriendViewHolder extends RecyclerView.ViewHolder{
         status = (CircleImageView) itemView.findViewById(R.id.status);
         this.context = context;
     }
-
-
 
 }
 

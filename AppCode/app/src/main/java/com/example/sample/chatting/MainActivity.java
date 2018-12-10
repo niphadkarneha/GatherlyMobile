@@ -15,11 +15,15 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.sample.chatting.data.FriendDB;
 import com.example.sample.chatting.data.StaticConfig;
+import com.example.sample.chatting.model.Friend;
+import com.example.sample.chatting.model.ListFriend;
 import com.example.sample.chatting.service.ServiceUtils;
 import com.example.sample.chatting.ui.FriendsFragment;
 import com.example.sample.chatting.ui.GlobalChatFragment;
@@ -42,13 +46,13 @@ public class MainActivity extends AppCompatActivity {
     public static String STR_INFO_FRAGMENT = "INFO";
     public static String STR_GLOBALCHAT_FRAGMENT = "CHAT";
     public static String STR_NAVIGATIONDRAWER_FRAGMENT = "HAMBURGER";
-
     private FloatingActionButton floatButton;
     private ViewPagerAdapter adapter;
-
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
+    ListFriend friend = new ListFriend();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,39 +179,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        if(viewPager.getCurrentItem() == 0)
-        {
-           menu.findItem(R.id.action_search).setVisible(true);
-        }
-        else
-        {
-            menu.findItem(R.id.action_search).setVisible(false);
-        }
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.about) {
-            Toast.makeText(this, "Gatherly version 1.0", Toast.LENGTH_LONG).show();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();

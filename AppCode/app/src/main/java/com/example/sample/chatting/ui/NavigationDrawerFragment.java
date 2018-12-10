@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.sample.chatting.HelpPageActivity;
 import com.example.sample.chatting.Helper.CustomAdapter;
 import com.example.sample.chatting.MainActivity;
 import com.example.sample.chatting.R;
@@ -106,8 +107,7 @@ public class NavigationDrawerFragment extends Fragment {
                 }
                 if (position == 2)
                 {
-                    startActivity(new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("http://qav2.cs.odu.edu/fordFanatics/index.php")));
+                    startActivity(new Intent(getActivity(), HelpPageActivity.class));
                 }
 
             }

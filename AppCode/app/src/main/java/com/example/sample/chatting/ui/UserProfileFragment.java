@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +56,7 @@ import java.util.List;
 public class UserProfileFragment extends Fragment {
     TextView tvUserName;
     ImageView avatar;
+    RatingBar ratingBar;
 
     private List<Configuration> listConfig = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -129,6 +131,59 @@ public class UserProfileFragment extends Fragment {
         setupArrayListInfo(myAccount);
         setImageAvatar(context, myAccount.avata);
         tvUserName.setText(myAccount.name);
+        ratingBar = (RatingBar) view.findViewById(R.id.rating);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("GlobalChat");
+        reference.orderByChild("messageUser").equalTo(FirebaseAuth.getInstance().getCurrentUser().getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.exists())
+                {
+                    int message_count = (int) dataSnapshot.getChildrenCount();
+
+                    if(message_count >= 10 ) {
+                        ratingBar.setRating(5);
+                    }
+                    else if(message_count >=9  ) {
+                        ratingBar.setRating((float) 4.5);
+                    }
+                    else if(message_count >=8  ) {
+                        ratingBar.setRating(4);
+                    }
+                    else if(message_count >=7  ) {
+                        ratingBar.setRating((float) 3.5);
+                    }
+                    else if(message_count >=6  ) {
+                        ratingBar.setRating(3);
+                    }
+                    else if(message_count >=5  ) {
+                        ratingBar.setRating((float) 2.5);
+                    }
+                    else if(message_count >=4  ) {
+                        ratingBar.setRating(2);
+                    }
+                    else if(message_count >=3  ) {
+                        ratingBar.setRating((float) 1.5);
+                    }
+                    else if(message_count >=2  ) {
+                        ratingBar.setRating(1);
+                    }
+                    else if(message_count >=1  ) {
+                        ratingBar.setRating((float) 0.5);
+                    }
+                    else {
+                    ratingBar.setRating(0);
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         recyclerView = (RecyclerView)view.findViewById(R.id.info_recycler_view);
         infoAdapter = new UserInfoAdapter(listConfig);

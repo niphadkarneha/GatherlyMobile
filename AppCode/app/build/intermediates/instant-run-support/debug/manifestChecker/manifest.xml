@@ -73,6 +73,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.sample.chatting.OpenImageActivity" />
+        <activity android:name="com.example.sample.chatting.HelpPageActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"

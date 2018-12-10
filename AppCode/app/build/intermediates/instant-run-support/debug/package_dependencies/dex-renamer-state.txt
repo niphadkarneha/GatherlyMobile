@@ -1,4 +1,4 @@
-#Tue Dec 04 05:15:02 PST 2018
-base.0=D\:\\Photoshop\\Chatting\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\49
+#Mon Dec 10 05:17:21 PST 2018
+base.0=D\:\\Photoshop\\Chatting\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\106
 path.0=classes.dex
 renamed.0=classes.dex

@@ -15,4 +15,37 @@
     <string name="hint_username">Enter a new username</string>
     <string name="hint_email_reset">Enter your email</string>
     <string name="enter_group_name">Enter group name</string>
+    <string name="terms_conditions">How to use Gatherly\'s mobile app\n\n
+
+<b>1. How do I add invite people?</b>\n\n
+        a.	Click on the + icon and a small display will pop up. It will ask you to enter a friend’s email address. Type in a valid email address like abc@gmail.com and press, “ok”.\n\n
+        b.	An invitation has been sent to your friend.\n\n
+<b>2. How do I chat with a friend?</b>\n\n
+     a.	Click on the name of the friend you want to chat with and it will open a chat window. You can send messages, share any file (.doc, .docx, .pdf), you can also share an image (.jpg, .png, .jpeg).\n\n
+<b>3. How do I know who is currently online?</b>\n\n
+        a.	Click on the + icon and a small display will pop up. It will ask you to enter a friend’s email address. Type in a valid email address like abc@gmail.com and press, “ok”.\n\n
+        b.	An invitation has been sent to your friend.\n\n
+<b>4. How do I create groups?</b>\n\n
+        a.	Go to the second tab, on the people icon with a +icon.\n\n
+        b.	Give your group a name in, “Enter group name”.\n\n
+        c.	Select from your list of friends who you want to be part of the group, you need a minimum of 2 members to create a group. Click on the icon at the upper right corner which says, “Create Group”.\n\n
+        d.	This tab will display all of the groups you have created and are a part of.\n\n
+
+<b>5. Third tab is the Profile page.</b>\n\n
+        a.	You can change the Display picture by clicking the icon. It will let you select from all of the images in your phone’s gallery and downloaded images.\n\n
+        b.	Clicking on the username will let you edit the username.\n\n
+        c.	Email: Display’s the email id that was used to register on Gatherly’s mobile application.\n\n
+        d.	Change password gives you the option to reset your password.\n\n
+        e.	Sign out will log you out of the application, you will have to log back in to access all of the features of the application.\n\n
+
+<b>6.	Fourth tab is the global chat room.</b>\n\n
+        a.	Everybody who is on Gatherly is automatically added to this global chat room.\n\n
+        b.	You can send messages, share a file, and share an image.\n\n
+
+<b>7.	The sixth tab is the Navigation bar, its current functionality is similar to the profile picture.</b>\n\n
+        a.	View profile, will take you to your profile page.\n\n
+        b.	Groups will take you to the groups page.\n\n
+        c.	Invite a friend, lets you send out invitations to your friends.\n\n
+        d.	Helppage\n\n
+    </string>
 </resources>

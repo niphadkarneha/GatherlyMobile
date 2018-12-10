@@ -23,7 +23,11 @@ public class ListFriend {
         return "";
     }
 
+
+
+
     public void setListFriend(ArrayList<Friend> listFriend) {
         this.listFriend = listFriend;
     }
+
 }
