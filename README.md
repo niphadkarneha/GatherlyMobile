@@ -30,4 +30,4 @@ In order to install GatherlyMobile application on the android phone follow the s
 4. The application will now be launched on your phone, go ahead and explore.
 
 
-![ActiveUsers](./AppStatistics/Activeusers.png)
+![ActiveUsers](./AppStatistics/Activeusers.png "Active user statistics after deployment.")
