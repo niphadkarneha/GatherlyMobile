@@ -28,3 +28,6 @@ In order to install GatherlyMobile application on the android phone follow the s
   c. If prompted, create a new folder and press run.<br/>
 3. You can use an emulator to test the application but to explore all of the features available on the application connect your      phone to the Android SDK and press, "Run".
 4. The application will now be launched on your phone, go ahead and explore.
+
+
+![ActiveUsers](./AppStatistics/Activeusers.png)
